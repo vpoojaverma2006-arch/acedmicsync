@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcademicSyns - Host Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f3f7;
+        }
+
+        .sidebar {
+            width: 240px;
+            height: 100vh;
+            background: #34213F;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 25px 15px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 14px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+
+        .menu a:hover {
+            background: #A76578;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            color: #34213F;
+        }
+
+        .host-name {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #34213F;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+
+        <div class="logo">
+            AcademicSyns
+        </div>
+
+        <div class="menu">
+            <a href="#">Dashboard</a>
+            <a href="#">Teachers</a>
+            <a href="#">Students</a>
+            <a href="#">Activity</a>
+            <a href="#">Settings</a>
+            <a href="#">Logout</a>
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <div class="topbar">
+            <h1>Host Dashboard</h1>
+
+            <div class="host-name">
+                Host Panel
+            </div>
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Teachers</h2>
+                <p>Manage AcademicSyns teachers</p>
+            </div>
+
+            <div class="card">
+                <h2>Students</h2>
+                <p>Manage registered students</p>
+            </div>
+
+            <div class="card">
+                <h2>Activity</h2>
+                <p>Monitor platform activity</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
