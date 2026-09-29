@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AcademicSyns | Academic Platform</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f5fb;
+            color: #34213F;
+        }
+
+        /* Navbar */
+        .navbar {
+            height: 70px;
+            background: #34213F;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #A76578;
+        }
+
+        .login-btn {
+            border: 1px solid white;
+            padding: 9px 18px;
+            border-radius: 6px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 7%;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 50px;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: #A76578;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #34213F;
+            color: white;
+            text-decoration: none;
+            padding: 13px 25px;
+            border-radius: 7px;
+        }
+
+        .hero-btn:hover {
+            background: #A76578;
+        }
+
+        .hero-box {
+            width: 380px;
+            height: 300px;
+            background: #34213F;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .hero-box h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .hero-box p {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* Features */
+        .features {
+            padding: 70px 7%;
+            background: white;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-text {
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+        .feature-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .feature-card {
+            width: 280px;
+            padding: 30px 22px;
+            border-radius: 12px;
+            background: #f7f5fb;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #34213F;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* Responsive */
+        @media (max-width: 800px) {
+            .nav-links {
+                gap: 12px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-box {
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            AcademicSyns
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="{% url 'host_login' %}" class="login-btn">
+                Host Login
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                Smarter Learning with
+                <span>AcademicSyns</span>
+            </h1>
+
+            <p>
+                A connected academic platform designed to bring
+                students, teachers and academic management together
+                in one place.
+            </p>
+
+            <a href="#features" class="hero-btn">
+                Explore Platform
+            </a>
+
+        </div>
+
+
+        <div class="hero-box">
+
+            <div>
+                <h2>Learn. Connect. Grow.</h2>
+
+                <p>
+                    Manage academic activities,
+                    connect with teachers and students,
+                    and keep everything organized.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features -->
+    <section class="features" id="features">
+
+        <h2>What AcademicSyns Offers</h2>
+
+        <p class="section-text">
+            One platform for a connected academic experience.
+        </p>
+
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+
+                <h3>Students</h3>
+
+                <p>
+                    Access academic information,
+                    learning resources and important updates.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <h3>Teachers</h3>
+
+                <p>
+                    Manage academic activities,
+                    resources and student-related work.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <h3>Academic Management</h3>
+
+                <p>
+                    Monitor and manage the academic
+                    platform from a centralized system.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="features" id="about">
+
+        <h2>About AcademicSyns</h2>
+
+        <p class="section-text">
+            AcademicSyns is designed to simplify academic
+            communication, management and collaboration
+            through a single digital platform.
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            © 2026 AcademicSyns. All Rights Reserved.
+        </p>
+
+    </footer>
+
+</body>
+</html>

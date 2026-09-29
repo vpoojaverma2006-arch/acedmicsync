@@ -3,6 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 
+def home(request):
+    return render(request, "host/home.html")
+
+
 def host_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
