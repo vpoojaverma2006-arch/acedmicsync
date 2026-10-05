@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Profile Input - AcademicSyns</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0B0F1A;
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 20px;
+    }
+
+    .form-card {
+      background-color: #1A1F3D;
+      width: 100%;
+      max-width: 500px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #00E5FF;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #A855F7;
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      background-color: #0B0F1A;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #00E5FF;
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+    }
+
+    input[type="file"]::file-selector-button {
+      background-color: #A855F7;
+      color: #FFFFFF;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+      background-color: #00E5FF;
+      color: #0B0F1A;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: linear-gradient(135deg, #00E5FF, #A855F7);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.3s ease, transform 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-card">
+    <h2 class="form-title">Teacher Profile Form</h2>
+    
+    <form id="profileForm">
+      
+      <!-- Profile Photo -->
+      <div class="form-group">
+        <label for="profile_photo">Profile Photo</label>
+        <input type="file" id="profile_photo" name="profile_photo" class="form-control" accept="image/*" required>
+      </div>
+
+      <!-- Staff ID -->
+      <div class="form-group">
+        <label for="staff_id">Staff ID</label>
+        <input type="text" id="staff_id" name="staff_id" class="form-control" placeholder="Staff ID" required>
+      </div>
+
+      <!-- Mobile No. -->
+      <div class="form-group">
+        <label for="mobile_no">Mobile No.</label>
+        <input type="tel" id="mobile_no" name="mobile_no" class="form-control" placeholder="Mobile No." required>
+      </div>
+
+      <!-- Department -->
+      <div class="form-group">
+        <label for="department">Department</label>
+        <input type="text" id="department" name="department" class="form-control" placeholder="Department" required>
+      </div>
+
+      <!-- Qualification -->
+      <div class="form-group">
+        <label for="qualification">Qualification</label>
+        <input type="text" id="qualification" name="qualification" class="form-control" placeholder="Qualification" required>
+      </div>
+
+      <!-- Specialization -->
+      <div class="form-group">
+        <label for="specialization">Specialization</label>
+        <input type="text" id="specialization" name="specialization" class="form-control" placeholder="Specialization" required>
+      </div>
+
+      <!-- Total Experience -->
+      <div class="form-group">
+        <label for="experience">Total Experience Years</label>
+        <input type="number" id="experience" name="experience" class="form-control" placeholder="Total Experience Years" min="0" step="0.5" required>
+      </div>
+
+      <!-- LinkedIn Link -->
+      <div class="form-group">
+        <label for="linkedin_url">LinkedIn</label>
+        <input type="url" id="linkedin_url" name="linkedin_url" class="form-control" placeholder="LinkedIn URL">
+      </div>
+
+      <!-- GitHub Link -->
+      <div class="form-group">
+        <label for="github_url">GitHub</label>
+        <input type="url" id="github_url" name="github_url" class="form-control" placeholder="GitHub URL">
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Submit Profile</button>
+
+    </form>
+  </div>
+
+</body>
+</html>

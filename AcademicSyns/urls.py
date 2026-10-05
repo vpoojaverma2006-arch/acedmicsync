@@ -12,4 +12,6 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("admin/", admin.site.urls),
     path("host/", include("host.urls")),
+    path('teacher/', include("teacher.urls")), # Student app URLs include hain
+     path('usertable/', include("usertable.urls")),
 ]
