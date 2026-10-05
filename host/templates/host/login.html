@@ -1,30 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>AcademicSyns - Host Login</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(0, 229, 255, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(168, 85, 247, 0.15),
+                    transparent 30%
+                ),
+                #0B0F1A;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+        }
+
+
+        .login-container {
+
+            width: 900px;
+            max-width: 100%;
+
+            min-height: 520px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: #10182B;
+
+            border: 1px solid #1A2A4A;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 0 30px rgba(0, 229, 255, 0.12),
+                0 0 60px rgba(168, 85, 247, 0.08);
+        }
+
+
+        /* LEFT SIDE */
+
+        .left-side {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #111A36,
+                    #180D2C
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 50px;
+
+            position: relative;
+        }
+
+
+        .left-side::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(0, 229, 255, 0.12);
+
+            filter: blur(30px);
+
+            top: 40px;
+            left: 40px;
+        }
+
+
+        .left-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 40px;
+        }
+
+
+        .logo span {
+            color: #00E5FF;
+        }
+
+
+        .graduation {
+            font-size: 75px;
+
+            margin-bottom: 25px;
+
+            filter:
+                drop-shadow(
+                    0 0 12px
+                    rgba(0, 229, 255, 0.5)
+                );
+        }
+
+
+        .left-side h1 {
+
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .left-side p {
+
+            color: #AAB1C0;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .right-side {
+
+            padding: 55px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .right-side h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .right-side .subtitle {
+
+            color: #858EA2;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #D9DCE5;
+
+            font-size: 14px;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 15px;
+
+            background: #0B0F1A;
+
+            color: white;
+
+            border: 1px solid #26314D;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #00E5FF;
+
+            box-shadow:
+                0 0 10px
+                rgba(0, 229, 255, 0.18);
+        }
+
+
+        .error {
+
+            background: rgba(255, 60, 90, 0.1);
+
+            border: 1px solid #ff4f70;
+
+            color: #ff8ca0;
+
+            padding: 10px;
+
+            border-radius: 7px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+        }
+
+
+        .login-submit {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #00E5FF,
+                    #A855F7
+                );
+
+            color: #0B0F1A;
+
+            font-weight: bold;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            margin-top: 8px;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 0 15px
+                rgba(0, 229, 255, 0.25);
+        }
+
+
+        .login-submit:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 0 25px
+                rgba(0, 229, 255, 0.45);
+        }
+
+
+        .back-home {
+
+            text-align: center;
+
+            margin-top: 25px;
+        }
+
+
+        .back-home a {
+
+            color: #00E5FF;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 750px) {
+
+            .login-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .left-side {
+
+                padding: 35px;
+
+            }
+
+            .left-side h1 {
+
+                font-size: 25px;
+
+            }
+
+            .graduation {
+
+                font-size: 55px;
+
+            }
+
+            .right-side {
+
+                padding: 40px 30px;
+
+            }
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-    <h1>AcademicSyns</h1>
-    <h2>Host Login</h2>
 
-    <form method="POST">
-        {% csrf_token %}
+    <div class="login-container">
 
-        <label>Username</label>
-        <input type="text" name="username" required>
 
-        <br><br>
+        <!-- LEFT -->
 
-        <label>Password</label>
-        <input type="password" name="password" required>
+        <div class="left-side">
 
-        <br><br>
+            <div class="left-content">
 
-        <button type="submit">Login</button>
-    </form>
+                <div class="logo">
+                    🎓 Academic<span>Syns</span>
+                </div>
+
+                <div class="graduation">
+                    🎓
+                </div>
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Login to your AcademicSyns
+                    Host Panel and manage the
+                    academic platform.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT -->
+
+        <div class="right-side">
+
+            <h2>
+                Host Login
+            </h2>
+
+            <p class="subtitle">
+                Enter your credentials to continue.
+            </p>
+
+
+            {% if error %}
+
+                <div class="error">
+                    {{ error }}
+                </div>
+
+            {% endif %}
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-submit"
+                >
+                    Login to Host Panel →
+                </button>
+
+            </form>
+
+
+            <div class="back-home">
+
+                <a href="/">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 
 </body>
+
 </html>
