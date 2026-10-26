@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard | AcademicSyns</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0B0F1A;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            height: 70px;
+            background: #10182B;
+            border-bottom: 1px solid #26324D;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00E5FF;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: white;
+            border: 1px solid #A855F7;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .logout:hover {
+            background: #A855F7;
+        }
+
+        .container {
+            padding: 45px;
+        }
+
+        .welcome {
+            margin-bottom: 35px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .welcome span {
+            color: #00E5FF;
+        }
+
+        .welcome p {
+            color: #AAB3C5;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #10182B;
+            border: 1px solid #26324D;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #00E5FF;
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            color: #00E5FF;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #AAB3C5;
+            line-height: 1.6;
+        }
+
+        .profile {
+            margin-top: 35px;
+            background: #10182B;
+            border: 1px solid #26324D;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .profile h2 {
+            color: #A855F7;
+            margin-bottom: 20px;
+        }
+
+        .profile p {
+            margin: 12px 0;
+            color: #D8DEEA;
+        }
+
+        .profile strong {
+            color: #00E5FF;
+        }
+
+        @media (max-width: 800px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 25px;
+            }
+
+            .navbar {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AcademicSyns
+        </div>
+
+        <a href="/admin/logout/" class="logout">
+            Logout
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+        <section class="welcome">
+
+            <h1>
+                Welcome,
+                <span>{{ teacher.teacher_name }}</span>
+            </h1>
+
+            <p>
+                Welcome to your AcademicSyns Teacher Dashboard.
+            </p>
+
+        </section>
+
+
+        <section class="cards">
+
+            <div class="card">
+                <h2>Students</h2>
+                <p>
+                    View and manage student information,
+                    academic records and activities.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Assignments</h2>
+                <p>
+                    Create assignments, manage submissions
+                    and track student progress.
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>Study Material</h2>
+                <p>
+                    Upload and manage notes, PDFs and
+                    other learning materials.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="profile">
+
+            <h2>Teacher Profile</h2>
+
+            <p>
+                <strong>Name:</strong>
+                {{ teacher.teacher_name }}
+            </p>
+
+            <p>
+                <strong>Teacher ID:</strong>
+                {{ teacher.teacher_id }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ teacher.email }}
+            </p>
+
+            <p>
+                <strong>Mobile:</strong>
+                {{ teacher.mobile }}
+            </p>
+
+            <p>
+                <strong>Department:</strong>
+                {{ teacher.department }}
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

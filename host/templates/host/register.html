@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | AcademicSyns</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0B0F1A;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 34px;
+            font-weight: bold;
+            color: #00E5FF;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #AAB3C5;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #10182B;
+            border: 1px solid #26324D;
+            border-radius: 18px;
+            padding: 40px 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #00E5FF;
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #00E5FF;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #AAB3C5;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+            background: #A855F7;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #00E5FF;
+            color: #0B0F1A;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #AAB3C5;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #00E5FF;
+        }
+
+        @media (max-width: 650px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            AcademicSyns
+        </div>
+
+        <p class="subtitle">
+            Create your AcademicSyns account
+        </p>
+
+        <div class="cards">
+
+            <!-- Teacher -->
+
+            <div class="card">
+
+                <div class="icon">👨‍🏫</div>
+
+                <h2>Teacher Registration</h2>
+
+                <p>
+                    Register as a teacher and manage
+                    students, assignments and study materials.
+                </p>
+
+                <a href="/teacher/register/" class="btn">
+                    Register as Teacher
+                </a>
+
+            </div>
+
+
+            <!-- Host -->
+
+            <div class="card">
+
+                <div class="icon">👤</div>
+
+                <h2>Host Registration</h2>
+
+                <p>
+                    Register as a host and manage teachers,
+                    students and academic activities.
+                </p>
+
+                <a href="/host/register/" class="btn">
+                    Register as Host
+                </a>
+
+            </div>
+
+        </div>
+
+        <a href="/" class="back">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</body>
+</html>

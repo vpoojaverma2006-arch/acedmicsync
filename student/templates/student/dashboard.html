@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | AcademicSyns</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0B0F1A;
+            color: white;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #10182B;
+            padding: 25px 15px;
+            border-right: 1px solid #27324A;
+        }
+
+        .logo {
+            text-align: center;
+            color: #00E5FF;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            color: #B8BDCA;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .menu a:hover {
+            background: #0B0F1A;
+            color: #00E5FF;
+        }
+
+        .main {
+            margin-left: 240px;
+            padding: 35px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #00E5FF;
+        }
+
+        .header p {
+            color: #A8AFBF;
+        }
+
+        .welcome {
+            margin-top: 30px;
+            padding: 25px;
+            background: #10182B;
+            border-radius: 14px;
+            border: 1px solid #27324A;
+        }
+
+        .welcome h2 {
+            margin-top: 0;
+            color: #A855F7;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: #10182B;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #27324A;
+        }
+
+        .card h3 {
+            color: #00E5FF;
+        }
+
+        .card p {
+            color: #A8AFBF;
+        }
+
+        .logout {
+            color: #FF7B9C !important;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+        <div class="logo">
+            AcademicSyns
+        </div>
+
+        <div class="menu">
+
+            <a href="#">
+                Dashboard
+            </a>
+
+            <a href="#">
+                My Profile
+            </a>
+
+            <a href="#">
+                Assignments
+            </a>
+
+            <a href="#">
+                Notes
+            </a>
+
+            <a href="#">
+                Attendance
+            </a>
+
+            <a href="#">
+                Results
+            </a>
+
+            <a href="{% url 'home' %}" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main">
+
+        <div class="header">
+
+            <h1>Student Dashboard</h1>
+
+            <p>
+                Welcome to your AcademicSyns dashboard
+            </p>
+
+        </div>
+
+
+        <!-- Welcome -->
+        <div class="welcome">
+
+            <h2>
+                Welcome, {{ student.student_name }} 👋
+            </h2>
+
+            <p>
+                Manage your academic activities from here.
+            </p>
+
+        </div>
+
+
+        <!-- Student Information -->
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Student ID</h3>
+
+                <p>
+                    {{ student.student_id }}
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Roll Number</h3>
+
+                <p>
+                    {{ student.roll_number }}
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Course / Branch</h3>
+
+                <p>
+                    {{ student.course }}
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Semester</h3>
+
+                <p>
+                    {{ student.semester }}
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Email</h3>
+
+                <p>
+                    {{ student.email }}
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Mobile</h3>
+
+                <p>
+                    {{ student.mobile }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
