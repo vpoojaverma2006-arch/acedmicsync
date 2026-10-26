@@ -13,4 +13,5 @@ urlpatterns = [
         views.teacher_dashboard,
         name="teacher_dashboard"
     ),
+    path('teacher-profile/', views.teacher_profile, name='teacher_profile'),
 ]

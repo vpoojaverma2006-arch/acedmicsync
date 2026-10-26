@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path, include
 from host import views
 
-
 urlpatterns = [
     # Home
     path("", views.home, name="home"),
@@ -10,7 +9,7 @@ urlpatterns = [
     # Admin
     path("admin/", admin.site.urls),
 
-    # Common Login & Register
+    # Common Login and Registration
     path("login/", views.common_login, name="login"),
     path("register/", views.register, name="register"),
 
