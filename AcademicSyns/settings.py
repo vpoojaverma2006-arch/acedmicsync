@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'teacher',
     'usertable',
     'student',
+    'assignments',
 
     
 ]
@@ -132,3 +133,6 @@ MAILERS = {
     },
 }
 LOGIN_URL = "/host/login/"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

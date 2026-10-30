@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Registration | AcademicSyns</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 24px 14px;
+            font-family: Arial, sans-serif;
+            background: #0B0F1A;
+            color: #F1F5F9;
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 25px auto;
+            padding: 28px;
+            background: #10182B;
+            border: 1px solid #26334D;
+            border-radius: 16px;
+        }
+
+        h1 { color: #00E5FF; }
+
+        label {
+            display: block;
+            margin: 16px 0 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #35435D;
+            border-radius: 8px;
+            background: #0B0F1A;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 8px;
+            background: #00E5FF;
+            color: #0B0F1A;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a { color: #00E5FF; }
+        .error { color: #FDA4AF; }
+        .success { color: #86EFAC; }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Teacher Registration</h1>
+        <p>Create your AcademicSyns teacher account.</p>
+
+        {% for message in messages %}
+            <p class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">
+                {{ message }}
+            </p>
+        {% endfor %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label for="teacher_name">Full Name</label>
+            <input id="teacher_name" name="teacher_name" required>
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required>
+
+            <label for="mobile">Mobile Number</label>
+            <input id="mobile" name="mobile" maxlength="15" required>
+
+            <label for="teacher_id">Teacher ID</label>
+            <input id="teacher_id" name="teacher_id" required>
+
+            <label for="department">Department</label>
+            <input id="department" name="department" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password"
+                   minlength="8" required>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input id="confirm_password" type="password"
+                   name="confirm_password" minlength="8" required>
+
+            <button type="submit">Create Teacher Account</button>
+        </form>
+
+        <p>Already registered?
+            <a href="{% url 'login' %}">Login here</a>
+        </p>
+    </div>
+</body>
+</html>

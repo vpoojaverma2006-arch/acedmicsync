@@ -31,6 +31,7 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.teacher_name
+        
 
 
 

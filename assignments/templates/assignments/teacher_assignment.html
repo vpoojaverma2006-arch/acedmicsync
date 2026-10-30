@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Assignments | AcademicSyns</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 25px;
+            font-family: Arial, sans-serif;
+            background: #0B0F1A;
+            color: #F1F5F9;
+        }
+
+        .container { max-width: 950px; margin: auto; }
+
+        h1 { color: #00E5FF; }
+
+        .card {
+            background: #10182B;
+            border: 1px solid #26334D;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 12px;
+        }
+
+        a { color: #00E5FF; }
+
+        .button {
+            display: inline-block;
+            padding: 10px 14px;
+            margin: 8px 8px 8px 0;
+            border-radius: 7px;
+            background: #00E5FF;
+            color: #0B0F1A;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>My Assignments</h1>
+
+        <a class="button" href="{% url 'upload_assignment' %}">
+            + Upload New Assignment
+        </a>
+
+        {% for assignment in assignments %}
+            <div class="card">
+                <h2>{{ assignment.title }}</h2>
+                <p><strong>Subject:</strong> {{ assignment.subject }}</p>
+                <p><strong>Description:</strong>
+                    {{ assignment.description|default:"No description" }}
+                </p>
+                <p><strong>Due Date:</strong> {{ assignment.due_date }}</p>
+
+                <a class="button"
+                   href="{% url 'download_assignment' assignment.id %}">
+                    Download File
+                </a>
+            </div>
+        {% empty %}
+            <div class="card">
+                <p>You have not uploaded any assignments yet.</p>
+            </div>
+        {% endfor %}
+
+        <p><a href="{% url 'teacher_dashboard' %}">
+            Back to Dashboard
+        </a></p>
+    </div>
+</body>
+</html>

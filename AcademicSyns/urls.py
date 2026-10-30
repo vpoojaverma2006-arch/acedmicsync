@@ -1,27 +1,28 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from host import views
 
 urlpatterns = [
-    # Home
     path("", views.home, name="home"),
-
-    # Admin
     path("admin/", admin.site.urls),
 
-    # Common Login and Registration
     path("login/", views.common_login, name="login"),
     path("register/", views.register, name="register"),
 
-    # Host
     path("host/", include("host.urls")),
-
-    # Teacher
     path("teacher/", include("teacher.urls")),
-
-    # Student
     path("student/", include("student.urls")),
-
-    # User Table
     path("usertable/", include("usertable.urls")),
+
+    # Assignment URLs
+    path("assignments/", include("assignments.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Dashboard | AcademicSyns</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0B0F1A;
+            color: #F1F5F9;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 245px;
+            background: #10182B;
+            padding: 25px 18px;
+            border-right: 1px solid #26344D;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            color: #00E5FF;
+            font-size: 23px;
+            margin-bottom: 40px;
+        }
+
+        .menu-title {
+            color: #718096;
+            font-size: 12px;
+            margin: 25px 10px 12px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 13px 12px;
+            margin-bottom: 7px;
+            color: #CBD5E1;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #172A40;
+            color: #00E5FF;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        header {
+            padding: 20px 4%;
+            background: #10182B;
+            border-bottom: 1px solid #26344D;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .logout {
+            color: #00E5FF;
+            text-decoration: none;
+        }
+
+        .content {
+            padding: 30px 4%;
+        }
+
+        .welcome {
+            background: #10182B;
+            border: 1px solid #26344D;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            color: #00E5FF;
+            margin-top: 0;
+        }
+
+        .welcome p {
+            color: #CBD5E1;
+        }
+
+        /* STATISTICS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #10182B;
+            border: 1px solid #26344D;
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .stat-card h3 {
+            color: #94A3B8;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .stat-card .number {
+            color: #00E5FF;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 10px 0 0;
+        }
+
+        /* SECTIONS */
+        .section {
+            background: #10182B;
+            border: 1px solid #26344D;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            color: #00E5FF;
+            font-size: 19px;
+            margin-top: 0;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 15px;
+        }
+
+        .action-card {
+            background: #17243A;
+            border: 1px solid #26344D;
+            border-radius: 9px;
+            padding: 18px;
+        }
+
+        .action-card h3 {
+            color: #00E5FF;
+            font-size: 16px;
+        }
+
+        .action-card p {
+            color: #CBD5E1;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .button {
+            display: inline-block;
+            background: #00E5FF;
+            color: #0B0F1A;
+            padding: 10px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* TABLE */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th, td {
+            padding: 13px;
+            text-align: left;
+            border-bottom: 1px solid #26344D;
+            font-size: 14px;
+        }
+
+        th {
+            color: #00E5FF;
+        }
+
+        td {
+            color: #CBD5E1;
+        }
+
+        .empty {
+            color: #94A3B8;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .subject {
+            background: #172A40;
+            color: #00E5FF;
+            padding: 10px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 700px) {
+            .layout {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #26344D;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .sidebar a {
+                display: inline-block;
+                margin: 3px;
+            }
+
+            .menu-title {
+                margin-top: 15px;
+            }
+
+            .content {
+                padding: 20px 4%;
+            }
+        }
+
+        @media(max-width: 450px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <h2 class="logo">AcademicSyns</h2>
+
+        <p class="menu-title">MAIN MENU</p>
+
+        <a href="{% url 'teacher_dashboard' %}" class="active">
+            Overview
+        </a>
+
+        <a href="#subjects">My Subjects</a>
+
+        <a href="#students">My Students</a>
+
+        <a href="{% url 'teacher_assignments' %}">
+            My Assignments
+        </a>
+
+        <p class="menu-title">ACCOUNT</p>
+
+        <a href="{% url 'teacher_profile' %}">
+            My Profile
+        </a>
+
+        <a href="{% url 'login' %}">
+            Logout
+        </a>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="main">
+
+        <header>
+            <h2>Teacher Dashboard</h2>
+
+            <a class="logout" href="{% url 'login' %}">
+                Logout
+            </a>
+        </header>
+
+
+        <main class="content">
+
+            <!-- WELCOME -->
+            <section class="welcome">
+
+                <h1>
+                    Welcome, {{ teacher.teacher_name }}!
+                </h1>
+
+                <p>Welcome to your AcademicSyns Teacher Portal.</p>
+
+                <p>
+                    <strong>Teacher ID:</strong>
+                    {{ teacher.teacher_id }}
+                </p>
+
+                <p>
+                    <strong>Department:</strong>
+                    {{ teacher.department }}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ teacher.email }}
+                </p>
+
+            </section>
+
+
+            <!-- STATISTICS -->
+            <section class="stats">
+
+                <div class="stat-card">
+                    <h3>Total Students</h3>
+                    <p class="number">{{ total_students }}</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>My Subjects</h3>
+                    <p class="number">{{ total_subjects }}</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Assignments</h3>
+                    <p class="number">{{ total_assignments }}</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Upcoming Assignments</h3>
+                    <p class="number">{{ upcoming_assignments }}</p>
+                </div>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+            <section class="section">
+
+                <h2>Quick Actions</h2>
+
+                <div class="actions">
+
+                    <div class="action-card">
+                        <h3>Upload Assignment</h3>
+                        <p>Upload assignments and study materials.</p>
+
+                        <a class="button"
+                           href="{% url 'upload_assignment' %}">
+                            Upload Now
+                        </a>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>My Assignments</h3>
+                        <p>Manage your uploaded assignments.</p>
+
+                        <a class="button"
+                           href="{% url 'teacher_assignments' %}">
+                            View Assignments
+                        </a>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>My Profile</h3>
+                        <p>View your teacher account details.</p>
+
+                        <a class="button"
+                           href="{% url 'teacher_profile' %}">
+                            View Profile
+                        </a>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- SUBJECTS -->
+            <section class="section" id="subjects">
+
+                <h2>My Subjects</h2>
+
+                <div class="subject-list">
+
+                    {% for subject in my_subjects %}
+
+                        <span class="subject">
+                            {{ subject }}
+                        </span>
+
+                    {% empty %}
+
+                        <p class="empty">
+                            No subjects available yet.
+                            Upload an assignment to add a subject.
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+
+            <!-- RECENT ASSIGNMENTS -->
+            <section class="section">
+
+                <h2>Recent Assignments</h2>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Subject</th>
+                                <th>Due Date</th>
+                                <th>Uploaded</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for assignment in recent_assignments %}
+
+                            <tr>
+                                <td>{{ assignment.title }}</td>
+                                <td>{{ assignment.subject }}</td>
+                                <td>{{ assignment.due_date }}</td>
+                                <td>{{ assignment.created_at|date:"d M Y" }}</td>
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="4" class="empty">
+                                    No assignments uploaded yet.
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <!-- STUDENTS -->
+            <section class="section" id="students">
+
+                <h2>My Students</h2>
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Roll Number</th>
+                                <th>Course</th>
+                                <th>Semester</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for student in my_students %}
+
+                            <tr>
+                                <td>{{ student.student_name }}</td>
+                                <td>{{ student.roll_number }}</td>
+                                <td>{{ student.course }}</td>
+                                <td>{{ student.semester }}</td>
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="4" class="empty">
+                                    No students found in your department.
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+</html>
