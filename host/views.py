@@ -1,13 +1,14 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.db import transaction
 from django.utils.crypto import get_random_string
 
 import openpyxl
 
 from student.models import Student
+from .models import Host
 
 
 # =========================
@@ -48,7 +49,7 @@ def common_login(request):
                 return redirect("teacher_dashboard")
 
             # HOST
-            if user.is_staff:
+            if hasattr(user, "host_profile"):
                 return redirect("host_dashboard")
 
             return render(
@@ -67,10 +68,7 @@ def common_login(request):
             }
         )
 
-    return render(
-        request,
-        "host/login.html"
-    )
+    return render(request, "host/login.html")
 
 
 # =========================
@@ -78,11 +76,7 @@ def common_login(request):
 # =========================
 
 def register(request):
-
-    return render(
-        request,
-        "host/register.html"
-    )
+    return render(request, "host/register.html")
 
 
 # =========================
@@ -102,7 +96,7 @@ def host_login(request):
             password=password
         )
 
-        if user is not None:
+        if user is not None and hasattr(user, "host_profile"):
 
             login(request, user)
 
@@ -112,13 +106,137 @@ def host_login(request):
             request,
             "host/login.html",
             {
-                "error": "Invalid username or password."
+                "error": "Invalid host username or password."
             }
         )
 
+    return render(request, "host/login.html")
+
+
+# =========================
+# HOST REGISTRATION
+# Only superuser can create Host
+# =========================
+
+@user_passes_test(
+    lambda user: user.is_authenticated and user.is_superuser
+)
+def host_register(request):
+
+    if request.method == "POST":
+
+        host_name = request.POST.get("host_name", "").strip()
+        email = request.POST.get("email", "").strip().lower()
+        mobile = request.POST.get("mobile", "").strip()
+        host_id = request.POST.get("host_id", "").strip()
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get("confirm_password", "")
+
+        # Required fields check
+        if not all([
+            host_name,
+            email,
+            mobile,
+            host_id,
+            password,
+            confirm_password
+        ]):
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": "Please fill all fields."
+                }
+            )
+
+        # Password match check
+        if password != confirm_password:
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": "Passwords do not match."
+                }
+            )
+
+        # Password length check
+        if len(password) < 8:
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": "Password must be at least 8 characters."
+                }
+            )
+
+        # Email check
+        if User.objects.filter(username=email).exists():
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": "This email is already registered."
+                }
+            )
+
+        # Host ID check
+        if Host.objects.filter(host_id=host_id).exists():
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": "Host ID already exists."
+                }
+            )
+
+        try:
+
+            with transaction.atomic():
+
+                # Create login account
+                user = User.objects.create_user(
+                    username=email,
+                    email=email,
+                    password=password,
+                    is_staff=True
+                )
+
+                # Create Host profile
+                Host.objects.create(
+                    user=user,
+                    host_name=host_name,
+                    email=email,
+                    mobile=mobile,
+                    host_id=host_id
+                )
+
+            # Automatically login after registration
+            login(request, user)
+
+            # Open Host Dashboard
+            return redirect("host_dashboard")
+
+        except Exception as e:
+
+            return render(
+                request,
+                "host/host_register.html",
+                {
+                    "error": (
+                        "Registration failed. "
+                        "Please check the details."
+                    )
+                }
+            )
+
     return render(
         request,
-        "host/login.html"
+        "host/host_register.html"
     )
 
 
@@ -128,6 +246,13 @@ def host_login(request):
 
 @login_required
 def host_dashboard(request):
+
+    if (
+        not hasattr(request.user, "host_profile")
+        and not request.user.is_superuser
+    ):
+
+        return redirect("common_login")
 
     return render(
         request,
@@ -141,6 +266,13 @@ def host_dashboard(request):
 
 @login_required
 def bulk_student(request):
+
+    if (
+        not hasattr(request.user, "host_profile")
+        and not request.user.is_superuser
+    ):
+
+        return redirect("common_login")
 
     if request.method == "POST":
 
@@ -209,6 +341,8 @@ def bulk_student(request):
                             "Missing required field"
                         )
 
+                    email = str(email).strip().lower()
+
                     # Email check
                     if User.objects.filter(
                         username=email
@@ -261,7 +395,7 @@ def bulk_student(request):
                             password=temporary_password
                         )
 
-                        # Create student profile
+                        # Create Student profile
                         Student.objects.create(
                             user=user,
                             student_name=student_name,

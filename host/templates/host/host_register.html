@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Host Registration | AcademicSyns</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #050b1c, #071c4d, #020817);
+            color: white;
+            padding: 30px 15px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #00cfff;
+            font-size: 34px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px rgba(0,207,255,0.4);
+        }
+
+        .header p {
+            color: #a9c5ff;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(13, 43, 105, 0.75);
+            border: 1px solid rgba(0, 190, 255, 0.25);
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        h2 {
+            text-align: center;
+            color: #00d5ff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #c2d5ff;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #dce9ff;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #4167a8;
+            border-radius: 7px;
+            background: #091a3d;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #00d5ff;
+            box-shadow: 0 0 8px rgba(0,213,255,0.3);
+        }
+
+        input::placeholder {
+            color: #91a9d0;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: linear-gradient(90deg, #536dfe, #00aaff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0,190,255,0.5);
+        }
+
+        .error {
+            color: #ff7777;
+            text-align: center;
+        }
+
+        .success {
+            color: #69ffae;
+            text-align: center;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 22px;
+            color: #b9d4ff;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #00d5ff;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>AcademicSyns</h1>
+        <p>Create your AcademicSyns Host Account</p>
+    </div>
+
+    <div class="container">
+
+        <h2>Host Registration</h2>
+
+        <p class="subtitle">
+            Register as a Host
+        </p>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if success %}
+            <p class="success">{{ success }}</p>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>Host Name</label>
+            <input type="text" name="host_name"
+                   placeholder="Enter host name" required>
+
+            <label>Email Address</label>
+            <input type="email" name="email"
+                   placeholder="Enter email address" required>
+
+            <label>Mobile Number</label>
+            <input type="text" name="mobile"
+                   placeholder="Enter mobile number" required>
+
+            <label>Host ID</label>
+            <input type="text" name="host_id"
+                   placeholder="Enter host ID" required>
+
+            <label>Password</label>
+            <input type="password" name="password"
+                   placeholder="Create password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password"
+                   placeholder="Confirm password" required>
+
+            <button type="submit">Register as Host</button>
+
+        </form>
+
+        <a href="/" class="back">← Back to Home</a>
+
+    </div>
+
+</body>
+</html>

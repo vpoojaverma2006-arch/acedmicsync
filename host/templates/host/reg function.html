@@ -1,0 +1,65 @@
+@user_passes_test(
+    lambda user: user.is_authenticated and user.is_superuser
+)
+def host_register(request):
+
+    if request.method == "POST":
+
+        name = request.POST.get("host_name", "").strip()
+        email = request.POST.get("email", "").strip().lower()
+        mobile = request.POST.get("mobile", "").strip()
+        host_id = request.POST.get("host_id", "").strip()
+        password = request.POST.get("password", "")
+        confirm_password = request.POST.get("confirm_password", "")
+
+        if not all([name, email, mobile, host_id, password, confirm_password]):
+            messages.error(request, "Please fill all fields.")
+
+        elif password != confirm_password:
+            messages.error(request, "Passwords do not match.")
+
+        elif len(password) < 8:
+            messages.error(request, "Password must be at least 8 characters.")
+
+        elif User.objects.filter(username=email).exists():
+            messages.error(request, "Email already registered.")
+
+        elif Host.objects.filter(host_id=host_id).exists():
+            messages.error(request, "Host ID already exists.")
+
+        elif Host.objects.filter(email=email).exists():
+            messages.error(request, "Email already registered.")
+
+        else:
+            try:
+                with transaction.atomic():
+
+                    user = User.objects.create_user(
+                        username=email,
+                        email=email,
+                        password=password,
+                        is_staff=True
+                    )
+
+                    Host.objects.create(
+                        user=user,
+                        host_name=name,
+                        email=email,
+                        mobile=mobile,
+                        host_id=host_id
+                    )
+
+                messages.success(
+                    request,
+                    "Host account created successfully."
+                )
+
+                return redirect("host_dashboard")
+
+            except Exception:
+                messages.error(
+                    request,
+                    "Registration failed. Please try again."
+                )
+
+    return render(request, "host/host_register.html")
